@@ -12,3 +12,5 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
     return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
   }
 };
+
+// existingCartItem contains the matched object if it exists
