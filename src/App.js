@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
@@ -27,6 +27,7 @@ class App extends React.Component {
         // Instead of const snapShot = await userRef.get(); we can use directly use below one
         // and best pt is the below method attaches a listener for userRef to update this.state when changes are done
         userRef.onSnapshot((snapShot) => {
+          // this uses the
           setCurrentUser({
             id: snapShot.id,
             ...snapShot.data(),
@@ -48,13 +49,28 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
-          <Route exact path="/signin" component={SignUpAndSignInPage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <SignUpAndSignInPage />
+              )
+            }
+          />
+          {/* <Route exact path="/signin" component={SignUpAndSignInPage} /> */}
         </Switch>
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   // dispatch - it is a way for Redux to know that whatever you're passing me is going to be an action object that I'm going to pass to every reducer.
@@ -65,7 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 // through connect the function is passed as prop obj to component since it is Higher order component.
 // With React Redux, your components never access the store directly - connect does it for you.
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 // For <Route exact path="/" component={HomePage} /> and <Route exact path="/hats" component={HomePage} />
 // After history.push("shops/jackets") it removes /hats and replaces to /shop/jackets
