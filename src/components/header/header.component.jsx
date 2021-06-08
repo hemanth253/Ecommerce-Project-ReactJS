@@ -44,10 +44,12 @@ const Header = ({ currentUser, hidden }) => {
 // here the state is the root reducer
 // (state)-->({user:{currentUser},cart:{hidden}})---> advanced destructuring, we can directly use currentUser and hidden
 // if key and value are of same variable name then we can pass that name directly in object like {x,y} instead of {x:x,y:y}
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-  hidden: state.cart.hidden,
-});
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.user.currentUser,
+    hidden: state.cart.hidden,
+  };
+};
 
 // This connect(and mapStateToProps) is used whenever we need properties from reducers
 // connect can take 1 of 2 components either like mapStateToProps like or
