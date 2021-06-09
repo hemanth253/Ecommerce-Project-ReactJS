@@ -55,6 +55,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           {/* we can have routes like .shop/hats,.... - so exact not required */}
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route path="/shop" component={ShopPage} />
           <Route
             exact
@@ -68,7 +69,6 @@ class App extends React.Component {
             }
           />
           {/* <Route exact path="/signin" component={SignUpAndSignInPage} /> */}
-          <Route exact path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     );

@@ -1,5 +1,6 @@
 .collection-item {
-  width: 22%;
+  // %-w.r.t parent,vw-w.r.t window
+  width: 22vw;
   display: flex;
   flex-direction: column;
   height: 350px;
