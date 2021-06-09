@@ -15,7 +15,7 @@ const StripeCheckoutButton = ({ price }) => {
   return (
     <StripeCheckout
       label="Pay Now"
-      name="Pheonix Empire"
+      name="Phoenix Empire"
       billingAddress
       shippingAddress
       image="https://svgshare.com/i/CUz.svg"
